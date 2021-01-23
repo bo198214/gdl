@@ -1,0 +1,29 @@
+(role player)
+
+(input player, inc)
+(input player, dec)
+
+(base (p 1))
+
+(base (p (f 1)))
+(base (p (f (f 1))))
+(base (p (f (f (f 1)))))
+(base (p (f (f (f (f 1))))))
+(base (p (f (f (f (f (f 1)))))))
+(base (p (f (f (f (f (f (f 1))))))))
+(base (p (f (f (f (f (f (f (f 1)))))))))
+(base (p (f (f (f (f (f (f (f (f 1))))))))))
+(base (p (f (f (f (f (f (f (f (f (f 1)))))))))))
+(base (p (f (f (f (f (f (f (f (f (f (f 1))))))))))))
+
+(legal player inc)
+
+(<= (legal player dec) (true (p (f ?x))))
+
+(init (p 1))
+(<= (next (p (f ?x))) (does player inc) (true (p ?x)))
+(<= (next (p ?x)) (does player dec) (true (p (f ?x))))
+(<= terminal (true (p (f (f (f (f (f (f (f (f (f (f 1)))))))))))))
+
+(<= (goal player 100) terminal)
+(<= (goal player 0) (not terminal))
