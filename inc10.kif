@@ -1,29 +1,32 @@
 (role player)
 
-(input player, inc)
-(input player, dec)
+(input player inc)
+(input player dec)
 
-(base (p 1))
+(base (pos 0))
+(base (pos 1))
+(base (pos 2))
+(base (pos 3))
+(base (pos 4))
+(base (pos 5))
+(base (pos 6))
+(base (pos 7))
+(base (pos 8))
+(base (pos 9))
+(base (pos 10))
 
-(base (p (f 1)))
-(base (p (f (f 1))))
-(base (p (f (f (f 1)))))
-(base (p (f (f (f (f 1))))))
-(base (p (f (f (f (f (f 1)))))))
-(base (p (f (f (f (f (f (f 1))))))))
-(base (p (f (f (f (f (f (f (f 1)))))))))
-(base (p (f (f (f (f (f (f (f (f 1))))))))))
-(base (p (f (f (f (f (f (f (f (f (f 1)))))))))))
-(base (p (f (f (f (f (f (f (f (f (f (f 1))))))))))))
+(init (pos 0))
 
-(legal player inc)
+(<= (legal player inc) (true (pos ?x)) (succ ?x ?y))
+(<= (legal player dec) (true (pos ?x)) (succ ?y ?x))
 
-(<= (legal player dec) (true (p (f ?x))))
+(<= (next (pos ?y)) (does player inc) (true (pos ?x)) (succ ?x ?y))
+(<= (next (pos ?y)) (does player dec) (true (pos ?x)) (succ ?y ?x))
 
-(init (p 1))
-(<= (next (p (f ?x))) (does player inc) (true (p ?x)))
-(<= (next (p ?x)) (does player dec) (true (p (f ?x))))
-(<= terminal (true (p (f (f (f (f (f (f (f (f (f (f 1)))))))))))))
-
+(<= terminal (true (pos 10)))
 (<= (goal player 100) terminal)
 (<= (goal player 0) (not terminal))
+
+; world logic
+
+(succ 0 1) (succ 1 2) (succ 2 3) (succ 3 4) (succ 4 5) (succ 5 6) (succ 6 7) (succ 7 8) (succ 8 9) (succ 9 10)

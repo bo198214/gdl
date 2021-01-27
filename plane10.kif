@@ -1,0 +1,27 @@
+(role player)
+
+(init (p 0 0))
+
+(<= (legal player n) (true (p ?x1 ?y1)) (succ ?y1 ?y2))
+(<= (legal player s) (true (p ?x1 ?y1)) (succ ?y2 ?y1))
+(<= (legal player w) (true (p ?x1 ?y1)) (succ ?x2 ?x1))
+(<= (legal player e) (true (p ?x1 ?y1)) (succ ?x1 ?x2))
+(<= (legal player ne) (true (p ?x1 ?y1)) (succ ?x1 ?x2) (succ ?y1 ?y2))
+(<= (legal player se) (true (p ?x1 ?y1)) (succ ?x1 ?x2) (succ ?y2 ?y1))
+(<= (legal player sw) (true (p ?x1 ?y1)) (succ ?x2 ?x1) (succ ?y2 ?y1))
+(<= (legal player nw) (true (p ?x1 ?y1)) (succ ?x2 ?x1) (succ ?y1 ?y2))
+
+(<= (next (p ?x1 ?y2)) (does player n) (true (p ?x1 ?y1)) (succ ?y1 ?y2))
+(<= (next (p ?x1 ?y2)) (does player s) (true (p ?x1 ?y1)) (succ ?y2 ?y1))
+(<= (next (p ?x2 ?y1)) (does player w) (true (p ?x1 ?y1)) (succ ?x2 ?x1))
+(<= (next (p ?x2 ?y1)) (does player e) (true (p ?x1 ?y1)) (succ ?x1 ?x2))
+(<= (next (p ?x2 ?y2)) (does player ne) (true (p ?x1 ?y1)) (succ ?x1 ?x2) (succ ?y1 ?y2))
+(<= (next (p ?x2 ?y2)) (does player se) (true (p ?x1 ?y1)) (succ ?x1 ?x2) (succ ?y2 ?y1))
+(<= (next (p ?x2 ?y2)) (does player sw) (true (p ?x1 ?y1)) (succ ?x2 ?x1) (succ ?y2 ?y1))
+(<= (next (p ?x2 ?y2)) (does player nw) (true (p ?x1 ?y1)) (succ ?x2 ?x1) (succ ?y1 ?y2))
+
+(<= terminal (true (p 10 10)))
+(<= (goal player 100) terminal)
+(<= (goal player 0) (not terminal))
+
+(succ 0 1) (succ 1 2) (succ 2 3) (succ 3 4) (succ 4 5) (succ 5 6) (succ 6 7) (succ 7 8) (succ 8 9) (succ 9 10) 

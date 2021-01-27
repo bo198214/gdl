@@ -1,0 +1,20 @@
+(role player)
+
+(input player inc)
+(input player dec)
+
+;(base (pos 0))
+;(<= (base (pos (i ?x))) (base (pos ?x)))
+
+(legal player inc)
+(<= (legal player dec) (true (pos (i ?x))))
+
+(init (pos 0))
+
+(<= (next (pos (i ?x))) (does player inc) (true (pos ?x)))
+(<= (next (pos ?x)) (does player dec) (true (pos (i ?x))))
+
+(<= terminal (true (pos (i (i (i (i (i (i (i (i (i (i 0)))))))))))))
+
+(<= (goal player 100) terminal)
+(<= (goal player 0) (not terminal))
