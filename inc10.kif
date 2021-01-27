@@ -3,6 +3,29 @@
 (input player inc)
 (input player dec)
 
+(init (pos 0))
+(init (step 0))
+
+(<= (legal player inc) (true (pos ?x)) (succ ?x ?y))
+(<= (legal player dec) (true (pos ?x)) (succ ?y ?x))
+
+(<= (next (step ?y)) (true (step ?x)) (succ ?x ?y))
+(<= (next (pos ?y)) (does player inc) (true (pos ?x)) (succ ?x ?y))
+(<= (next (pos ?y)) (does player dec) (true (pos ?x)) (succ ?y ?x))
+
+(<= win (true (pos 10)))
+(<= terminal win)
+(<= terminal (true (step 100)))
+
+(<= (goal player 100) win)
+(<= (goal player 0) (not win))
+
+; world logic
+
+(succ 0 1) (succ 1 2) (succ 2 3) (succ 3 4) (succ 4 5) (succ 5 6) (succ 6 7) (succ 7 8) (succ 8 9) (succ 9 10) (succ 10 11) (succ 11 12) (succ 12 13) (succ 13 14) (succ 14 15) (succ 15 16) (succ 16 17) (succ 17 18) (succ 18 19) (succ 19 20) (succ 20 21) (succ 21 22) (succ 22 23) (succ 23 24) (succ 24 25) (succ 25 26) (succ 26 27) (succ 27 28) (succ 28 29) (succ 29 30) (succ 30 31) (succ 31 32) (succ 32 33) (succ 33 34) (succ 34 35) (succ 35 36) (succ 36 37) (succ 37 38) (succ 38 39) (succ 39 40) (succ 40 41) (succ 41 42) (succ 42 43) (succ 43 44) (succ 44 45) (succ 45 46) (succ 46 47) (succ 47 48) (succ 48 49) (succ 49 50) (succ 50 51) (succ 51 52) (succ 52 53) (succ 53 54) (succ 54 55) (succ 55 56) (succ 56 57) (succ 57 58) (succ 58 59) (succ 59 60) (succ 60 61) (succ 61 62) (succ 62 63) (succ 63 64) (succ 64 65) (succ 65 66) (succ 66 67) (succ 67 68) (succ 68 69) (succ 69 70) (succ 70 71) (succ 71 72) (succ 72 73) (succ 73 74) (succ 74 75) (succ 75 76) (succ 76 77) (succ 77 78) (succ 78 79) (succ 79 80) (succ 80 81) (succ 81 82) (succ 82 83) (succ 83 84) (succ 84 85) (succ 85 86) (succ 86 87) (succ 87 88) (succ 88 89) (succ 89 90) (succ 90 91) (succ 91 92) (succ 92 93) (succ 93 94) (succ 94 95) (succ 95 96) (succ 96 97) (succ 97 98) (succ 98 99) (succ 99 100)
+
+(base (step 0)) (base (step 1)) (base (step 2)) (base (step 3)) (base (step 4)) (base (step 5)) (base (step 6)) (base (step 7)) (base (step 8)) (base (step 9)) (base (step 10)) (base (step 11)) (base (step 12)) (base (step 13)) (base (step 14)) (base (step 15)) (base (step 16)) (base (step 17)) (base (step 18)) (base (step 19)) (base (step 20)) (base (step 21)) (base (step 22)) (base (step 23)) (base (step 24)) (base (step 25)) (base (step 26)) (base (step 27)) (base (step 28)) (base (step 29)) (base (step 30)) (base (step 31)) (base (step 32)) (base (step 33)) (base (step 34)) (base (step 35)) (base (step 36)) (base (step 37)) (base (step 38)) (base (step 39)) (base (step 40)) (base (step 41)) (base (step 42)) (base (step 43)) (base (step 44)) (base (step 45)) (base (step 46)) (base (step 47)) (base (step 48)) (base (step 49)) (base (step 50)) (base (step 51)) (base (step 52)) (base (step 53)) (base (step 54)) (base (step 55)) (base (step 56)) (base (step 57)) (base (step 58)) (base (step 59)) (base (step 60)) (base (step 61)) (base (step 62)) (base (step 63)) (base (step 64)) (base (step 65)) (base (step 66)) (base (step 67)) (base (step 68)) (base (step 69)) (base (step 70)) (base (step 71)) (base (step 72)) (base (step 73)) (base (step 74)) (base (step 75)) (base (step 76)) (base (step 77)) (base (step 78)) (base (step 79)) (base (step 80)) (base (step 81)) (base (step 82)) (base (step 83)) (base (step 84)) (base (step 85)) (base (step 86)) (base (step 87)) (base (step 88)) (base (step 89)) (base (step 90)) (base (step 91)) (base (step 92)) (base (step 93)) (base (step 94)) (base (step 95)) (base (step 96)) (base (step 97)) (base (step 98)) (base (step 99)) (base (step 100))
+
 (base (pos 0))
 (base (pos 1))
 (base (pos 2))
@@ -15,18 +38,3 @@
 (base (pos 9))
 (base (pos 10))
 
-(init (pos 0))
-
-(<= (legal player inc) (true (pos ?x)) (succ ?x ?y))
-(<= (legal player dec) (true (pos ?x)) (succ ?y ?x))
-
-(<= (next (pos ?y)) (does player inc) (true (pos ?x)) (succ ?x ?y))
-(<= (next (pos ?y)) (does player dec) (true (pos ?x)) (succ ?y ?x))
-
-(<= terminal (true (pos 10)))
-(<= (goal player 100) terminal)
-(<= (goal player 0) (not terminal))
-
-; world logic
-
-(succ 0 1) (succ 1 2) (succ 2 3) (succ 3 4) (succ 4 5) (succ 5 6) (succ 6 7) (succ 7 8) (succ 8 9) (succ 9 10)
